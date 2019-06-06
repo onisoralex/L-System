@@ -1,14 +1,11 @@
 // Import stylesheets
 import "./style.css";
 
-
 // Global variables
 const canvasObj = document.getElementById("myCanvas");
 canvasObj.width = 300;
 canvasObj.height = 300;
 const ctx = canvasObj.getContext("2d");
-
-// first make int, for odd screen sizes; then add half of linewidth to positions to go on the pixel (canvas 0;0 seems to be between pixels)
 
 let pen = {
   dir: 0,
@@ -126,16 +123,16 @@ function exchange(char, rules) {
   switch (char) {
     case "+": // Turn Left
     case "-": // Turn Right
-      /* case "|": // Turn Back (180°) */
+    /* case "|": // Turn Back (180°) */
     case "[": // Push Drawing State to Stack
     case "]": // Pop Drawing State from Stack
-      /* case "#": // Increment line width */
-      /* case "!": // Decrement line width */
-      /* case "@": // Draw a dot with line width radius */
-      /* case "{": // Open a polygon */
-      /* case "}": // Close a polygon and fill it with line color */
-      /* case ">": // Multiply Line Length by Line Length Scale Factor */
-      /* case "<": // Divide Line Length by Line Length Scale Factor */
+    /* case "#": // Increment line width */
+    /* case "!": // Decrement line width */
+    /* case "@": // Draw a dot with line width radius */
+    /* case "{": // Open a polygon */
+    /* case "}": // Close a polygon and fill it with line color */
+    /* case ">": // Multiply Line Length by Line Length Scale Factor */
+    /* case "<": // Divide Line Length by Line Length Scale Factor */
     case "&": // Swap Meaning of + and -
       /* case "(": // Decrement turning angle by turning angle increment */
       /* case ")": // Increment turning angle by turning angle increment */
