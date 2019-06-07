@@ -1,4 +1,5 @@
-// import * as pen from "./module.pen";
+// import * as pen from "./pen.module";
+import "./script";
 
 // Global variables
 const canvasObj = document.getElementById("myCanvas");
