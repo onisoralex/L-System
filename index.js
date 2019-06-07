@@ -1,5 +1,4 @@
-// Import stylesheets
-import "./style.css";
+// import * as pen from "./module.pen";
 
 // Global variables
 const canvasObj = document.getElementById("myCanvas");
@@ -7,34 +6,36 @@ canvasObj.width = 300;
 canvasObj.height = 300;
 const ctx = canvasObj.getContext("2d");
 
+// first make int, for odd screen sizes; then add half of linewidth to positions to go on the pixel (canvas 0;0 seems to be between pixels)
+
 let pen = {
   dir: 0,
   angle: 0,
   lineLength: 0,
   x: 0,
   y: 0,
-  init: function() { // Initialises the starting values for the pen
+  init: function () { // Initialises the starting values for the pen
     this.dir = 90; // Set drawing direction to upwards
     this.angle = Number(eval(getValue("angle")));
     this.lineLength = Number(getValue("lineLength")); // Line Length
     this.x = Math.floor(canvasObj.width / 2); // Reset X position
     this.y = Math.floor(canvasObj.height / 2); // Reset X position
   },
-  turnLeft: function() { // Turn left a degrees
+  turnLeft: function () { // Turn left a degrees
     this.dir = (this.dir + this.angle) % 360; // + means turning counter clockwise starting with 0° at 3 o'clock
   },
-  turnRight: function() { // Turn right b degrees
+  turnRight: function () { // Turn right b degrees
     this.dir = (this.dir + (360 - this.angle)) % 360; // Turning counterclockwise to remain in positive number by the complementary angle
   },
-  getNextPos: function() {
+  getNextPos: function () {
     this.x = this.x + calculateNextPositionX(this);
     this.y = this.y - calculateNextPositionY(this); // Minus, because screen positions are positive downwards
     /* console.log("x:", this.x, "& y:", this.y, "& dir:", this.dir); */
   },
-  line: function() { // Draw forward
+  line: function () { // Draw forward
     ctx.lineTo(this.x + hp(), this.y + hp());
   },
-  move: function() { // Move forward (without drawing)
+  move: function () { // Move forward (without drawing)
     ctx.moveTo(this.x + hp(), this.y + hp());
   }
 };

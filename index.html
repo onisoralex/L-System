@@ -1,50 +1,54 @@
 <html>
 
-<header>
-	<title>L-System</title>
-</header>
+<head>
+  <title>L-System</title>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
 
 <body>
-	<label>Development Vars:</label>
-    <input id="developmentalVariables" class="shortTextField" oninput="start()" value="A B X Y" disabled>
-    <br>
-    <label>Drawing Vars:</label>
-    <input id="drawingVariables" class="shortTextField" oninput="start()" value="F" disabled>
-    <br>
-    <label>Moving Vars:</label>
-    <input id="movingVariables" class="shortTextField" oninput="start()" value="f" disabled>
-    <br>
-    <label>Constants:</label>
-    <input id="movingVariables" class="shortTextField" oninput="start()" value="+ - [ ]" disabled>
-    <br>
-    <label>Axiom:</label>
-    <input id="axiom" oninput="start()" value="FX">
-    <br>
-    <label>Rules:</label>
-    <input id="rules" oninput="start()" value="X -> X+YF+, Y -> −FX−Y">
-    <br>
-    <label>Angle:</label>
-    <input id="angle" placeholder="° (JS-Function)" oninput="start()" value="90">
-    <br>
-    <label>Angle Variation:</label>
-    <label class="readonly">unused</label>
-    <br>
-    <label>Line Length:</label>
-    <input id="lineLength" class="numberField" placeholder="px" oninput="start()" value="20">
-    <br>
-    <label>Line Thickness:</label>
-    <input id="lineThickness" class="numberField" placeholder="px" oninput="start()" value="1">
-    <br>
-    <label>Line Thickness Variation:</label>
-    <label class="readonly">unused</label>
-    <br>
-    <label>Iterations:</label>
-    <input id="iterations" class="numberField" oninput="start()" value="3">
-    <br>
-    <br>
-    <label>Result:</label>
-    <label id="result"></label>
-    <hr>
-    <canvas id="myCanvas"></canvas>
-  </body>
+  <label>Development Vars:</label>
+  <input id="developmentalVariables" class="shortTextField" oninput="start()" value="A B X Y" disabled>
+  <br>
+  <label>Drawing Vars:</label>
+  <input id="drawingVariables" class="shortTextField" oninput="start()" value="F" disabled>
+  <br>
+  <label>Moving Vars:</label>
+  <input id="movingVariables" class="shortTextField" oninput="start()" value="f" disabled>
+  <br>
+  <label>Constants:</label>
+  <input id="movingVariables" class="shortTextField" oninput="start()" value="+ - [ ]" disabled>
+  <br>
+  <label>Axiom:</label>
+  <input id="axiom" oninput="start()" value="FX">
+  <br>
+  <label>Rules:</label>
+  <input id="rules" oninput="start()" value="X -> X+YF+, Y -> −FX−Y">
+  <br>
+  <label>Angle:</label>
+  <input id="angle" placeholder="° (JS-Function)" oninput="start()" value="90">
+  <br>
+  <label>Angle Variation:</label>
+  <label class="readonly">unused</label>
+  <br>
+  <label>Line Length:</label>
+  <input id="lineLength" class="numberField" placeholder="px" oninput="start()" value="20">
+  <br>
+  <label>Line Thickness:</label>
+  <input id="lineThickness" class="numberField" placeholder="px" oninput="start()" value="1">
+  <br>
+  <label>Line Thickness Variation:</label>
+  <label class="readonly">unused</label>
+  <br>
+  <label>Iterations:</label>
+  <input id="iterations" class="numberField" oninput="start()" value="3">
+  <br>
+  <br>
+  <label>Result:</label>
+  <label id="result"></label>
+  <hr>
+  <canvas id="myCanvas"></canvas>
+
+  <script src="L-System.js" onload="start()"></script>
+</body>
+
 </html>
