@@ -1,5 +1,5 @@
 // import * as pen from "./pen.module";
-import "./script";
+import "./style";
 
 // Global variables
 const canvasObj = document.getElementById("myCanvas");
@@ -57,35 +57,35 @@ function start() {
   }
   resultField.innerText = `${result}`;
 
-  draw();
+  // draw();
 }
 
-function draw() {
-  ctx.clearRect(0, 0, canvasObj.width, canvasObj.height);
-  ctx.beginPath();
+// function draw() {
+//   ctx.clearRect(0, 0, canvasObj.width, canvasObj.height);
+//   ctx.beginPath();
 
-  pen.move();
+//   pen.move();
 
-  pen.getNextPos();
-  pen.line();
+//   pen.getNextPos();
+//   pen.line();
 
-  pen.turnLeft();
-  pen.getNextPos();
-  pen.line();
+//   pen.turnLeft();
+//   pen.getNextPos();
+//   pen.line();
 
-  pen.getNextPos();
-  pen.line();
+//   pen.getNextPos();
+//   pen.line();
 
-  pen.turnLeft();
-  pen.getNextPos();
-  pen.line();
+//   pen.turnLeft();
+//   pen.getNextPos();
+//   pen.line();
 
-  pen.turnRight();
-  pen.getNextPos();
-  pen.line();
+//   pen.turnRight();
+//   pen.getNextPos();
+//   pen.line();
 
-  ctx.stroke();
-}
+//   ctx.stroke();
+// }
 
 // Additional Functions for formation, calculation and drawing
 // ==============================================================
