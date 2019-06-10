@@ -29,9 +29,18 @@ let pen = {
     this.dir = (this.dir + (360 - this.angle)) % 360; // Turning counterclockwise to remain in positive number by the complementary angle
   },
   getNextPos: function () {
-    this.x = this.x + calculateNextPositionX(this);
-    this.y = this.y - calculateNextPositionY(this); // Minus, because screen positions are positive downwards
+    this.x = this.x + this.calculateNextPositionX();
+    this.y = this.y - this.calculateNextPositionY(); // Minus, because screen positions are positive downwards
     /* console.log("x:", this.x, "& y:", this.y, "& dir:", this.dir); */
+  },
+  degToRad: function () { // DEG to RAD
+    return this.dir / 180 * Math.PI;
+  },
+  getNextPositionX: function () { // Calculate next X Point
+    return Math.round(this.lineLength * Math.cos(this.degToRad()));
+  },
+  getNextPositionY: function () { // Calculate next Y Point
+    return Math.round(pthisen.lineLength * Math.sin(this.degToRad()));
   },
   line: function () { // Draw forward
     ctx.lineTo(this.x + hp(), this.y + hp());
@@ -57,35 +66,34 @@ function start() {
   }
   resultField.innerText = `${result}`;
 
-  // draw();
+  draw();
 }
 
-// function draw() {
-//   ctx.clearRect(0, 0, canvasObj.width, canvasObj.height);
-//   ctx.beginPath();
+function draw() {
+  ctx.clearRect(0, 0, canvasObj.width, canvasObj.height); // Resets the canvas
+  ctx.beginPath(); // Resets drawing instructions
+  pen.move(); // Sets the pen to the starting position
 
-//   pen.move();
+  pen.getNextPos();
+  pen.line();
 
-//   pen.getNextPos();
-//   pen.line();
+  pen.turnLeft();
+  pen.getNextPos();
+  pen.line();
 
-//   pen.turnLeft();
-//   pen.getNextPos();
-//   pen.line();
+  pen.getNextPos();
+  pen.line();
 
-//   pen.getNextPos();
-//   pen.line();
+  pen.turnLeft();
+  pen.getNextPos();
+  pen.line();
 
-//   pen.turnLeft();
-//   pen.getNextPos();
-//   pen.line();
+  pen.turnRight();
+  pen.getNextPos();
+  pen.line();
 
-//   pen.turnRight();
-//   pen.getNextPos();
-//   pen.line();
-
-//   ctx.stroke();
-// }
+  ctx.stroke();
+}
 
 // Additional Functions for formation, calculation and drawing
 // ==============================================================
@@ -153,21 +161,6 @@ function getTransformationByRule(char, rules) {
   }
   return char;
   // return "*";
-}
-
-// DEG to RAD
-function degToRad(deg) {
-  return deg / 180 * Math.PI;
-}
-
-// Calculate next X Point
-function calculateNextPositionX(pen) {
-  return Math.round(pen.lineLength * Math.cos(degToRad(pen.dir)));
-}
-
-// Calculate next Y Point
-function calculateNextPositionY(pen) {
-  return Math.round(pen.lineLength * Math.sin(degToRad(pen.dir)));
 }
 
 // Function to correct the position of the pixels if the linestrength is odd
