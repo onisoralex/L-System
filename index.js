@@ -29,8 +29,8 @@ let pen = {
     this.dir = (this.dir + (360 - this.angle)) % 360; // Turning counterclockwise to remain in positive number by the complementary angle
   },
   getNextPos: function () {
-    this.x = this.x + this.calculateNextPositionX();
-    this.y = this.y - this.calculateNextPositionY(); // Minus, because screen positions are positive downwards
+    this.x = this.x + this.getNextPositionX();
+    this.y = this.y - this.getNextPositionY(); // Minus, because screen positions are positive downwards
     /* console.log("x:", this.x, "& y:", this.y, "& dir:", this.dir); */
   },
   degToRad: function () { // DEG to RAD
@@ -40,7 +40,7 @@ let pen = {
     return Math.round(this.lineLength * Math.cos(this.degToRad()));
   },
   getNextPositionY: function () { // Calculate next Y Point
-    return Math.round(pthisen.lineLength * Math.sin(this.degToRad()));
+    return Math.round(this.lineLength * Math.sin(this.degToRad()));
   },
   line: function () { // Draw forward
     ctx.lineTo(this.x + hp(), this.y + hp());
@@ -59,20 +59,52 @@ function start() {
   let rules = extraxtRules(rulesField);
   ctx.lineWidth = getValue("lineThickness");
   const resultField = document.getElementById("result");
-  let result = axiom;
+  let resultAxiom = axiom;
 
   for (let i = 0; i < it; i++) {
-    result = transform(result, rules);
+    resultAxiom = transform(resultAxiom, rules);
   }
-  resultField.innerText = `${result}`;
+  resultField.innerText = `${resultAxiom}`;
 
-  draw();
+  draw(resultAxiom);
 }
 
-function draw() {
+function draw(resultAxiom) {
   ctx.clearRect(0, 0, canvasObj.width, canvasObj.height); // Resets the canvas
   ctx.beginPath(); // Resets drawing instructions
   pen.move(); // Sets the pen to the starting position
+  for (let i = 0; i < resultAxiom.length; i++) {
+    switch (resultAxiom.charAt(i)) {
+      case "F":
+        pen.getNextPos();
+        pen.line();
+        break;
+      case "+": // Turn Left
+        pen.turnLeft();
+        break;
+      case "-": // Turn Right
+        pen.turnRight();
+        break;
+      /* case "|": // Turn Back (180°) */
+      case "[": // Push Drawing State to Stack
+        break;
+      case "]": // Pop Drawing State from Stack
+        break;
+      /* case "#": // Increment line width */
+      /* case "!": // Decrement line width */
+      /* case "@": // Draw a dot with line width radius */
+      /* case "{": // Open a polygon */
+      /* case "}": // Close a polygon and fill it with line color */
+      /* case ">": // Multiply Line Length by Line Length Scale Factor */
+      /* case "<": // Divide Line Length by Line Length Scale Factor */
+      case "&": // Swap Meaning of + and -
+        break;
+      /* case "(": // Decrement turning angle by turning angle increment */
+      /* case ")": // Increment turning angle by turning angle increment */
+      default:
+        break;
+    }
+  }
 
   pen.getNextPos();
   pen.line();
