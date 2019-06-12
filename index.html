@@ -10,7 +10,7 @@
   <input id="developmentalVariables" class="shortTextField" oninput="start()" value="A B X Y" disabled>
   <br>
   <label>Drawing Vars:</label>
-  <input id="drawingVariables" class="shortTextField" oninput="start()" value="F" disabled>
+  <input id="drawingVariables" class="shortTextField" oninput="start()" value="F, 1" disabled>
   <br>
   <label>Moving Vars:</label>
   <input id="movingVariables" class="shortTextField" oninput="start()" value="f" disabled>
@@ -19,10 +19,13 @@
   <input id="movingVariables" class="shortTextField" oninput="start()" value="+ - [ ]" disabled>
   <br>
   <label>Axiom:</label>
-  <input id="axiom" oninput="start()" value="F">
+  <input id="axiom" oninput="start()" value="0">
   <br>
   <label>Rules:</label>
-  <input id="rules" oninput="start()" value="F -> F+F−F−F+F">
+  <input id="rules" oninput="start()" value="1 -> 11, 0 -> 1[0]0">
+  <br>
+  <label>Starting Direction:</label>
+  <input id="direction" placeholder="° (JS-Function)" oninput="start()" value="0">
   <br>
   <label>Angle:</label>
   <input id="angle" placeholder="° (JS-Function)" oninput="start()" value="90">
@@ -42,11 +45,11 @@
   <label>Iterations:</label>
   <input id="iterations" class="numberField" oninput="start()" value="3">
   <br>
+  <canvas id="myCanvas"></canvas>
   <br>
   <label>Result:</label>
+  <br>
   <label id="result"></label>
-  <hr>
-  <canvas id="myCanvas"></canvas>
 
   <!-- <script src="L-System.js" onload="start()"></script> -->
 </body>
