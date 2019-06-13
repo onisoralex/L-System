@@ -36,17 +36,11 @@ let pen = {
   popState: function () {
     let lastState = this.states[this.states.length - 1];
 
-    console.log("Old dir:", this.dir);
     this.dir = lastState.dir;
-    console.log("New dir:", this.dir);
-    console.log("Old x:", this.x);
     this.x = lastState.x;
-    console.log("New x:", this.x);
-    console.log("Old y:", this.y);
     this.y = lastState.y;
-    console.log("New y:", this.y);
 
-    this.states = this.states.pop();
+    this.states.pop();
   },
   getNextPos: function () {
     this.x = this.x + this.getNextPositionX();
@@ -109,12 +103,9 @@ function draw(resultAxiom) {
         break;
       /* case "|": // Turn Back (180°) */
       case "[": // Push Drawing State to Stack
-        console.log("pushing");
-        console.log(pen.states);
         pen.pushState();
         break;
       case "]": // Pop Drawing State from Stack
-        console.log("poping");
         pen.popState();
         break;
       /* case "#": // Increment line width */
