@@ -45,7 +45,7 @@ let pen = {
   getNextPos: function () {
     this.x = this.x + this.getNextPositionX();
     this.y = this.y - this.getNextPositionY(); // Minus, because screen positions are positive downwards
-    /* console.log("x:", this.x, "& y:", this.y, "& dir:", this.dir); */
+    this.move();
   },
   degToRad: function () { // DEG to RAD
     return this.dir / 180 * Math.PI;
@@ -90,7 +90,9 @@ function draw(resultAxiom) {
   for (let i = 0; i < resultAxiom.length; i++) {
     switch (resultAxiom.charAt(i)) {
       case "F":
-      case 1:
+      case "G":
+      case "0":
+      case "1":
         pen.getNextPos();
         pen.line();
         break;
