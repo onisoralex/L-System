@@ -19,22 +19,22 @@
   <input id="movingVariables" class="shortTextField" oninput="start()" value="+ - [ ]" disabled>
   <br>
   <label>Axiom:</label>
-  <input id="axiom" oninput="start()" value="0">
+  <input id="axiom" oninput="start()" value="X">
   <br>
   <label>Rules:</label>
-  <input id="rules" oninput="start()" value="1 -> 11, 0 -> 1[+0]-0">
+  <input id="rules" oninput="start()" value="(X → F+[[X]-X]-F[-FX]+X), (F → FF)">
   <br>
   <label>Starting Direction:</label>
-  <input id="direction" placeholder="° (JS-Function)" oninput="start()" value="90">
+  <input id="direction" placeholder="° (JS-Function)" oninput="start()" value="90 - 25">
   <br>
   <label>Angle:</label>
-  <input id="angle" placeholder="° (JS-Function)" oninput="start()" value="45">
+  <input id="angle" placeholder="° (JS-Function)" oninput="start()" value="30">
   <br>
   <label>Angle Variation:</label>
   <label class="readonly">unused</label>
   <br>
   <label>Line Length:</label>
-  <input id="lineLength" class="numberField" placeholder="px" oninput="start()" value="5">
+  <input id="lineLength" class="numberField" placeholder="px" oninput="start()" value="3">
   <br>
   <label>Line Thickness:</label>
   <input id="lineThickness" class="numberField" placeholder="px" oninput="start()" value="1">
@@ -43,7 +43,7 @@
   <label class="readonly">unused</label>
   <br>
   <label>Iterations:</label>
-  <input id="iterations" class="numberField" oninput="start()" value="4">
+  <input id="iterations" class="numberField" oninput="start()" value="6">
   <br>
   <canvas id="myCanvas"></canvas>
   <br>

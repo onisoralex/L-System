@@ -21,7 +21,7 @@ let pen = {
     this.angle = Number(eval(getValue("angle")));
     this.lineLength = Number(getValue("lineLength")); // Line Length
     this.x = Math.floor(canvasObj.width / 2); // Reset X position
-    this.y = Math.floor(canvasObj.height / 2); // Reset X position
+    this.y = Math.floor(canvasObj.height / 2 + 145); // Reset X position
   },
   turnLeft: function () { // Turn left a degrees
     this.dir = (this.dir + this.angle) % 360; // + means turning counter clockwise starting with 0° at 3 o'clock
@@ -67,6 +67,7 @@ let pen = {
 function start() {
   pen.init();
   console.clear();
+      console.log(pen.lineLength);
   let axiom = getValue("axiom");
   const rulesField = getValue("rules");
   const it = Number(getValue("iterations")); // How many iterations will be transformed
@@ -89,6 +90,8 @@ function draw(resultAxiom) {
   pen.move(); // Sets the pen to the starting position
   for (let i = 0; i < resultAxiom.length; i++) {
     switch (resultAxiom.charAt(i)) {
+      case "A":
+      case "B":
       case "F":
       case "G":
       case "0":
@@ -134,7 +137,7 @@ function draw(resultAxiom) {
 
 // Gets the HTML element by it's element ID
 function getValue(id) {
-  return document.getElementById(id).value.replace(/ /g, "");
+  return document.getElementById(id).value.replace(/\s|\(|\)/g, ""); // Eliminate whitespaces, "(" & ")" characters
 }
 
 // Creates an object with all rules specified by the user
@@ -143,8 +146,8 @@ function extraxtRules(rulesField) {
   let rules = [];
   for (let i = 0; i < rule.length; i++) {
     let ruleObject = {
-      input: rule[i].split("->")[0],
-      output: rule[i].split("->")[1]
+      input: rule[i].split(/->|→/)[0],
+      output: rule[i].split(/->|→/)[1]
     };
     rules.push(ruleObject);
   }
