@@ -20,7 +20,7 @@ let pen = {
     this.dir = Number(eval(getValue("direction")));; // Set drawing direction; Default right
     this.angle = Number(eval(getValue("angle")));
     this.lineLength = Number(getValue("lineLength")); // Line Length
-    this.x = Math.floor(canvasObj.width / 2); // Reset X position
+    this.x = Math.floor(canvasObj.width / 2 - 100); // Reset X position
     this.y = Math.floor(canvasObj.height / 2 + 145); // Reset X position
   },
   turnLeft: function () { // Turn left a degrees
@@ -67,18 +67,16 @@ let pen = {
 function start() {
   pen.init();
   console.clear();
-      console.log(pen.lineLength);
+  console.log(pen.lineLength);
   let axiom = getValue("axiom");
   const rulesField = getValue("rules");
   const it = Number(getValue("iterations")); // How many iterations will be transformed
   let rules = extraxtRules(rulesField);
   ctx.lineWidth = getValue("lineThickness");
   const resultField = document.getElementById("result");
-  let resultAxiom = axiom;
 
-  for (let i = 0; i < it; i++) {
-    resultAxiom = transform(resultAxiom, rules);
-  }
+  let resultAxiom = transform2(axiom, rules, it);
+
   resultField.innerText = `${resultAxiom}`;
 
   draw(resultAxiom);
@@ -156,13 +154,24 @@ function extraxtRules(rulesField) {
 
 // Recursive function to transform the Axiom character by character
 function transform(axiom, rules) {
-  if (axiom.length >= 2) {
+  if (axiom.length >= 1) {
     return exchange(axiom.slice(0, 1), rules) + transform(axiom.substring(1, axiom.length), rules);
-  } else if (axiom.length === 1) {
-    return exchange(axiom.slice(0, 1), rules);
   } else {
     return "";
   }
+}
+
+// Loop function to transform the Axiom character by character
+function transform2(axiom, rules, it) {
+  for (let i = 0; i < it; i++) {
+    let aux = "";
+    for (let j = 0; j < axiom.length; j++) {
+      aux = aux.concat(exchange(axiom.charAt(j, j + 1), rules));
+    }
+    axiom = aux;
+    // return + transform(axiom.substring(1, axiom.length), rules);
+  }
+  return axiom;
 }
 
 // If specific characters occur, they remain, else they get exchanged based on the rules
