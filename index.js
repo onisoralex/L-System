@@ -40,12 +40,12 @@ let pen = {
     this.x = lastState.x;
     this.y = lastState.y;
 
+    this.move();
     this.states.pop();
   },
   getNextPos: function () {
     this.x = this.x + this.getNextPositionX();
     this.y = this.y - this.getNextPositionY(); // Minus, because screen positions are positive downwards
-    this.move();
   },
   degToRad: function () { // DEG to RAD
     return this.dir / 180 * Math.PI;
