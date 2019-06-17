@@ -16,27 +16,31 @@ let pen = {
   x: 0,
   y: 0,
   states: [],
-  init: function () { // Initialises the starting values for the pen
+  init: function() { // Initialises the starting values for the pen
     this.dir = Number(eval(getValue("direction")));; // Set drawing direction; Default right
     this.angle = Number(eval(getValue("angle")));
     this.lineLength = Number(getValue("lineLength")); // Line Length
-    this.x = Math.floor(canvasObj.width / 2 - 100); // Reset X position
+    this.x = Math.floor(canvasObj.width / 2); // Reset X position
     this.y = Math.floor(canvasObj.height / 2 + 145); // Reset X position
   },
-  turnLeft: function () { // Turn left a degrees
+  turnLeft: function() { // Turn left a degrees
     this.dir = (this.dir + this.angle) % 360; // + means turning counter clockwise starting with 0° at 3 o'clock
   },
-  turnRight: function () { // Turn right b degrees
+  turnRight: function() { // Turn right b degrees
     this.dir = (this.dir + (360 - this.angle)) % 360; // Turning counterclockwise to remain in positive number by the complementary angle
   },
-  turnOneEighty: function () {
+  turnOneEighty: function() {
     this.dir = (this.dir + 180) % 360;
   },
-  pushState: function () {
-    let obj = { dir: this.dir, x: this.x, y: this.y };
+  pushState: function() {
+    let obj = {
+      dir: this.dir,
+      x: this.x,
+      y: this.y
+    };
     this.states.push(obj);
   },
-  popState: function () {
+  popState: function() {
     let lastState = this.states[this.states.length - 1];
 
     this.dir = lastState.dir;
@@ -46,23 +50,23 @@ let pen = {
     this.move();
     this.states.pop();
   },
-  getNextPos: function () {
+  getNextPos: function() {
     this.x = this.x + this.getNextPositionX();
     this.y = this.y - this.getNextPositionY(); // Minus, because screen positions are positive downwards
   },
-  degToRad: function () { // DEG to RAD
+  degToRad: function() { // DEG to RAD
     return this.dir / 180 * Math.PI;
   },
-  getNextPositionX: function () { // Calculate next X Point
+  getNextPositionX: function() { // Calculate next X Point
     return Math.round(this.lineLength * Math.cos(this.degToRad()));
   },
-  getNextPositionY: function () { // Calculate next Y Point
+  getNextPositionY: function() { // Calculate next Y Point
     return Math.round(this.lineLength * Math.sin(this.degToRad()));
   },
-  line: function () { // Draw forward
+  line: function() { // Draw forward
     ctx.lineTo(this.x + hp(), this.y + hp());
   },
-  move: function () { // Move forward (without drawing)
+  move: function() { // Move forward (without drawing)
     ctx.moveTo(this.x + hp(), this.y + hp());
   }
 };
@@ -116,17 +120,17 @@ function draw(resultAxiom) {
       case "]": // Pop Drawing State from Stack
         pen.popState();
         break;
-      /* case "#": // Increment line width */
-      /* case "!": // Decrement line width */
-      /* case "@": // Draw a dot with line width radius */
-      /* case "{": // Open a polygon */
-      /* case "}": // Close a polygon and fill it with line color */
-      /* case ">": // Multiply Line Length by Line Length Scale Factor */
-      /* case "<": // Divide Line Length by Line Length Scale Factor */
+        /* case "#": // Increment line width */
+        /* case "!": // Decrement line width */
+        /* case "@": // Draw a dot with line width radius */
+        /* case "{": // Open a polygon */
+        /* case "}": // Close a polygon and fill it with line color */
+        /* case ">": // Multiply Line Length by Line Length Scale Factor */
+        /* case "<": // Divide Line Length by Line Length Scale Factor */
       case "&": // Swap Meaning of + and -
         break;
-      /* case "(": // Decrement turning angle by turning angle increment */
-      /* case ")": // Increment turning angle by turning angle increment */
+        /* case "(": // Decrement turning angle by turning angle increment */
+        /* case ")": // Increment turning angle by turning angle increment */
       default:
         break;
     }
@@ -184,16 +188,16 @@ function exchange(char, rules) {
   switch (char) {
     case "+": // Turn Left
     case "-": // Turn Right
-    /* case "|": // Turn Back (180°) */
+      /* case "|": // Turn Back (180°) */
     case "[": // Push Drawing State to Stack
     case "]": // Pop Drawing State from Stack
-    /* case "#": // Increment line width */
-    /* case "!": // Decrement line width */
-    /* case "@": // Draw a dot with line width radius */
-    /* case "{": // Open a polygon */
-    /* case "}": // Close a polygon and fill it with line color */
-    /* case ">": // Multiply Line Length by Line Length Scale Factor */
-    /* case "<": // Divide Line Length by Line Length Scale Factor */
+      /* case "#": // Increment line width */
+      /* case "!": // Decrement line width */
+      /* case "@": // Draw a dot with line width radius */
+      /* case "{": // Open a polygon */
+      /* case "}": // Close a polygon and fill it with line color */
+      /* case ">": // Multiply Line Length by Line Length Scale Factor */
+      /* case "<": // Divide Line Length by Line Length Scale Factor */
     case "&": // Swap Meaning of + and -
       /* case "(": // Decrement turning angle by turning angle increment */
       /* case ")": // Increment turning angle by turning angle increment */
