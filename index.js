@@ -29,6 +29,9 @@ let pen = {
   turnRight: function () { // Turn right b degrees
     this.dir = (this.dir + (360 - this.angle)) % 360; // Turning counterclockwise to remain in positive number by the complementary angle
   },
+  turnOneEighty: function () {
+    this.dir = (this.dir + 180) % 360;
+  },
   pushState: function () {
     let obj = { dir: this.dir, x: this.x, y: this.y };
     this.states.push(obj);
@@ -104,7 +107,9 @@ function draw(resultAxiom) {
       case "−":
         pen.turnRight();
         break;
-      /* case "|": // Turn Back (180°) */
+      case "|": // Turn Back (180°)
+        pen.turnOneEighty();
+        break;
       case "[": // Push Drawing State to Stack
         pen.pushState();
         break;
