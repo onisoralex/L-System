@@ -13,6 +13,8 @@ Building up the axiom
 Drawing
   A, B, F, G, 0, 1   Draw a line forward (in the actual direction by the actual linelength)
 
+Known Bugs:
+  - Degrees don't seem to work propperly
 
 TODO:
   - Fix the simple tree
