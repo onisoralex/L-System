@@ -2,9 +2,9 @@
 import "./style";
 
 // Global variables
-const canvasObj = document.getElementById("myCanvas");
-canvasObj.width = 300;
-canvasObj.height = 300;
+const canvasObj = document.querySelector('#myCanvas');
+canvasObj.width = 5000; // Overriding the attribute in the elment
+canvasObj.height = 5000; // Overriding the attribute in the elment
 const ctx = canvasObj.getContext("2d");
 
 // first make int, for odd screen sizes; then add half of linewidth to positions to go on the pixel (canvas 0;0 seems to be between pixels)
@@ -17,11 +17,11 @@ let pen = {
   y: 0,
   states: [],
   init: function() { // Initialises the starting values for the pen
-    this.dir = Number(eval(getValue("direction")));; // Set drawing direction; Default right
-    this.angle = Number(eval(getValue("angle")));
-    this.lineLength = Number(getValue("lineLength")); // Line Length
+    this.dir = Number(eval(getValue("#direction"))); // Set drawing direction; Default right
+    this.angle = Number(eval(getValue("#angle")));
+    this.lineLength = Number(getValue("#lineLength")); // Line Length
     this.x = Math.floor(canvasObj.width / 2); // Reset X position
-    this.y = Math.floor(canvasObj.height / 2 + 145); // Reset X position
+    this.y = Math.floor(canvasObj.height / 2); // Reset X position
   },
   turnLeft: function() { // Turn left a degrees
     this.dir = (this.dir + this.angle) % 360; // + means turning counter clockwise starting with 0° at 3 o'clock
@@ -74,13 +74,12 @@ let pen = {
 function start() {
   pen.init();
   console.clear();
-  console.log(pen.lineLength);
-  let axiom = getValue("axiom");
-  const rulesField = getValue("rules");
-  const it = Number(getValue("iterations")); // How many iterations will be transformed
+  let axiom = getValue("#axiom");
+  const rulesField = getValue("#rules");
+  const it = Number(getValue("#iterations")); // How many iterations will be transformed
   let rules = extraxtRules(rulesField);
-  ctx.lineWidth = getValue("lineThickness");
-  const resultField = document.getElementById("result");
+  ctx.lineWidth = getValue("#lineThickness");
+  const resultField = document.querySelector("#result");
 
   let resultAxiom = transform2(axiom, rules, it);
 
@@ -144,7 +143,7 @@ function draw(resultAxiom) {
 
 // Gets the HTML element by it's element ID
 function getValue(id) {
-  return document.getElementById(id).value.replace(/\s|\(|\)/g, ""); // Eliminate whitespaces, "(" & ")" characters
+  return document.querySelector(id).value.replace(/\s|\(|\)/g, ""); // Eliminate whitespaces, "(" & ")" characters
 }
 
 // Creates an object with all rules specified by the user
@@ -161,6 +160,8 @@ function extraxtRules(rulesField) {
   return rules;
 }
 
+// TODO: The transform method should .split("F").join("FXA") instead of use a switch for every character. Would be 3x as fast
+// Update: That maynot be possible if multiple Rules are applied, since the second Rule may transform stuff that was just added by the first rule
 // Recursive function to transform the Axiom character by character
 function transform(axiom, rules) {
   if (axiom.length >= 1) {
@@ -223,4 +224,38 @@ function hp() {
   return (ctx.lineWidth / 2) % 1;
 }
 
+/*
+// Resize functionality for the div element containing the canvas (currently not in use)
+let p = document.querySelector('div');
+
+p.addEventListener('click', function init() {
+    p.removeEventListener('click', init, false);
+    p.className = p.className + ' resizable';
+    let resizer = document.createElement('div');
+    resizer.className = 'resizer';
+    p.appendChild(resizer);
+    resizer.addEventListener('mousedown', initDrag, false);
+}, false);
+
+let startX, startY, startWidth, startHeight;
+
+function initDrag(e) {
+   startX = e.clientX;
+   startY = e.clientY;
+   startWidth = parseInt(document.defaultView.getComputedStyle(p).width, 10);
+   startHeight = parseInt(document.defaultView.getComputedStyle(p).height, 10);
+   document.documentElement.addEventListener('mousemove', doDrag, false);
+   document.documentElement.addEventListener('mouseup', stopDrag, false);
+}
+
+function doDrag(e) {
+   p.style.width = (startWidth + e.clientX - startX) + 'px';
+   p.style.height = (startHeight + e.clientY - startY) + 'px';
+}
+
+function stopDrag(e) {
+    document.documentElement.removeEventListener('mousemove', doDrag, false);
+    document.documentElement.removeEventListener('mouseup', stopDrag, false);
+}
+*/
 start();

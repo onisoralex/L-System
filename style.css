@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway");
+
 body {
-  font-family: Raleway, sans-serif;
+  font-family: Raleway, Arial, sans-serif;
 }
 
 .readonly {
@@ -17,4 +18,26 @@ canvas {
 
 .shortTextField {
   max-width: 100px;
+}
+
+
+div#Div2 {
+  background: lime;
+  height: 200px;
+  width: 300px;
+}
+
+div.resizable {
+  background: cyan;
+  position: relative;
+}
+
+div .resizer {
+  width: 50px;
+  height: 50px;
+  background: blue;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
 }
